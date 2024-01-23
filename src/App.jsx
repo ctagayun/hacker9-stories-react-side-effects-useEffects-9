@@ -58,10 +58,12 @@ import * as React from 'react';
        //the function is called every time the searchTerm changes 
        //(e.g. when a user types into the HTML input field). 
        React.useEffect(() => {
-        localStorage.setItem('search', searchTerm); //<- use effect is 
+        console.log('Typed something into textbox. useEffect fired. ' +
+            ' Dependency Array= ' + [searchTerm]); //experiment with hook dependency array
+       /* localStorage.setItem('search', searchTerm); //<- use effect is 
                   //called initially when component renders for the 
                   //first time and whenever the user types something in 
-                  //the input text box
+                  //the input text box*/
        }, [searchTerm]); //<-- Dependency array of variables. 
                          //React.useEffect is triggered when 
                          //this dependency variable changes. In our
@@ -70,12 +72,13 @@ import * as React from 'react';
                          //Leaving out the second argument
                          //would make the function for the side-effect 
                          //run on every render (initial render and 
-                         //update renders) of the component
+                         //update renders) of the component 
+
       const handleSearch = (event) => {
           setSearchTerm(event.target.value); //store the value in the state updater function - setSearchTerm.
            /*localStorage.setItem('search', event.target.value);  refactor with line 44*/
         };
-
+       
       const searchedStories = stories.filter((story) =>
         story.title.toLowerCase().includes(searchTerm.toLowerCase())
       );
